@@ -3,8 +3,7 @@
 import random, string
 """
 Very simple script that generates passwords for you and saves it to disk with an associated account
-Have done my best to make it as user friendly as I can but feel free to report any bugs/suggestions to my
-email 7v3r0535@protonmail.com
+Have done my best to make it as user friendly as I can.
 """
 def leng_and_acc():
 		tmp_store = []
