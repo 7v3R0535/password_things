@@ -31,7 +31,7 @@ def genPassword(leng):
 	for index in range(leng):
 		passwd = passwd + random.choice(chars)
 	return passwd
-print("Just enrypting your data...")
+print("Just encrypting your data...")
 publicKey,privateKey = rsa.newkeys(2048)
 passwd = genPassword(passwd_length)
 encrypted_passwd = rsa.encrypt(passwd.encode(),publicKey)
@@ -41,3 +41,4 @@ with open("password_store.txt","a") as file:
 	file.write(str(encrypted_usr_name)+"\n")
 	file.close()
 	print("Done...")
+	
