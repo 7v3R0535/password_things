@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 #^^ this won't be needed if you are on Windows, was written for Deb based Linux OS(s)
-import random, string
+import random, string,rsa
 """
 Very simple script that generates passwords for you and saves it to disk with an associated account
 Have done my best to make it as user friendly as I can.
@@ -26,14 +26,18 @@ lengAndAcc = leng_and_acc()
 passwd_length = lengAndAcc[0]
 usr_name = lengAndAcc[1]
 def genPassword(leng):
-	chars = string.ascii_letters + string.digits + string.punctuation   
+	chars = string.ascii_letters + string.digits + string.punctuation
 	passwd = ""
 	for index in range(leng):
 		passwd = passwd + random.choice(chars)
 	return passwd
+print("Just enrypting your data...")
+publicKey,privateKey = rsa.newkeys(2048)
 passwd = genPassword(passwd_length)
+encrypted_passwd = rsa.encrypt(passwd.encode(),publicKey)
+encrypted_usr_name = rsa.encrypt(usr_name.encode(),publicKey)
 with open("password_store.txt","a") as file:
-	file.write(usr_name+":	")
-	file.write(passwd+"\n")
+	file.write(str(encrypted_passwd)+":	")
+	file.write(str(encrypted_usr_name)+"\n")
 	file.close()
 	print("Done...")
